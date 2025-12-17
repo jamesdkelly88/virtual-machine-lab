@@ -47,7 +47,6 @@ variable "networks" {
   description = "Network interface definitions"
   type = list(object({
     id          = number
-    ip_address  = string
     mac_address = string
     name        = string
     domain      = bool

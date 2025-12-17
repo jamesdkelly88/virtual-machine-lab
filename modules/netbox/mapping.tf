@@ -18,6 +18,15 @@ locals {
       virtio    = true
       cpu       = "host"
     }
+    vyos = {
+      name      = "VyOS"
+      type      = "l26"
+      iso       = "vyos_1.4_rolling.iso"
+      lxc_image = ""
+      uefi      = false
+      virtio    = true
+      cpu       = "host"
+    }
 
 
 

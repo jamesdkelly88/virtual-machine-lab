@@ -34,6 +34,12 @@ flowchart TD
 - Bitwarden Secrets Manager organisation
 - Terraform Cloud account
 
+## Personal settings
+
+- Terraform cloud organisation is hard-coded to mine
+- My hypervisors have multiple NICs - one for the main network and one for an internal network for a domain environment.
+- All my VMs follow the MAC address pattern 00:DE:AD:BE:EF:xx when on the main network for DHCP reasons.
+
 ### Environment variables
 
 - `BW_ACCESS_TOKEN`

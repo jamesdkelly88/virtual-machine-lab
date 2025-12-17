@@ -14,15 +14,6 @@ data "netbox_interfaces" "lookup" {
   }
 }
 
-data "netbox_ip_addresses" "lookup" {
-  for_each = { for i in data.netbox_interfaces.lookup.interfaces : i.id => i }
-
-  filter {
-    name  = "vm_interface_id"
-    value = each.key
-  }
-}
-
 data "netbox_virtual_disk" "lookup" {
   name_regex = "^${var.name}-\\d$"
 }
@@ -38,8 +29,7 @@ locals {
       id          = tonumber(replace(i.name, "eth", ""))
       name        = i.name
       mac_address = i.mac_address
-      ip_address  = split("/", data.netbox_ip_addresses.lookup[i.id].ip_addresses[0].ip_address)[0]
-      domain      = substr(data.netbox_ip_addresses.lookup[i.id].ip_addresses[0].ip_address, 0, 11) != "192.168.90."
+      domain      = !strcontains(i.mac_address, ":DE:AD:BE:EF:")
     }
   ]
   disks = [for d in data.netbox_virtual_disk.lookup.virtual_disks :
