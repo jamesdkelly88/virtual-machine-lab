@@ -70,6 +70,10 @@ variable "storage" {
     emulate_ssd = bool
   }))
 }
+variable "tags" {
+  description = "Comma separated list of tags for VM"
+  type        = string
+}
 variable "type" {
   description = "Proxmox OS Type"
   type        = string

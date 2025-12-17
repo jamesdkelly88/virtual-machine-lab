@@ -70,7 +70,7 @@ resource "proxmox_vm_qemu" "this" {
   scsihw       = var.virtio ? "virtio-scsi-single" : "lsi"
   startup      = ""
   tablet       = true
-  tags         = null
+  tags         = var.tags
   target_nodes = [var.node]
   dynamic "tpm_state" {
     for_each = var.os_type == "win11" ? toset([1]) : []

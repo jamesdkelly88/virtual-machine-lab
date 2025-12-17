@@ -23,6 +23,7 @@ module "proxmox" {
   node        = module.netbox.configuration.hypervisor
   os_type     = module.netbox.configuration.platform.type
   storage     = module.netbox.configuration.disks
+  tags        = module.netbox.configuration.platform.tag
   type        = module.netbox.configuration.type
   uefi        = module.netbox.configuration.platform.uefi
   virtio      = module.netbox.configuration.platform.virtio
