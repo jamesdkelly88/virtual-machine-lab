@@ -10,6 +10,16 @@ locals {
       virtio    = true
       cpu       = "host"
     }
+    debian-13 = {
+      name      = "Debian 13"
+      tag       = "debian"
+      type      = "l26"
+      iso       = "debian_13.2.0_netinst.iso"
+      lxc_image = ""
+      uefi      = false
+      virtio    = true
+      cpu       = "host"
+    }
     red-hat-enterprise-linux-9 = {
       name      = "Red Hat Enterprise Linux 9"
       tag       = "red-hat-enterprise-linux"
