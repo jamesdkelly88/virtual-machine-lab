@@ -41,12 +41,14 @@ locals {
       emulate_ssd = d.custom_fields["ssd"] == "y" ? true : false
     }
   ]
+  platform = jsondecode(data.http.platform.response_body).results[0]
 }
 
-data "netbox_devices" "lookup" {
-  filter {
-    name  = "cluster_id"
-    value = data.netbox_cluster.lookup.id
+data "http" "platform" {
+  url      = "https://netbox2.jk88.duckdns.org/api/dcim/platforms/?id=${local.vm.platform_id}"
+  insecure = true
+  request_headers = {
+    Accept        = "application/json"
+    Authorization = "Token ${var.token}"
   }
-  limit = 1
 }

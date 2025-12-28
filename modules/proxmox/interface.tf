@@ -82,7 +82,7 @@ variable "uefi" {
   description = "Use modern UEFI firmware instead of legacy BIOS"
   type        = bool
 }
-variable "virtio" {
-  description = "Use VirtIO instead of emulated physical hardware"
-  type        = bool
+variable "interface" {
+  description = "Interface type"
+  type        = string
 }

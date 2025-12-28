@@ -4,7 +4,7 @@ resource "proxmox_vm_qemu" "this" {
   agent   = 1
   balloon = 0
   bios    = var.uefi ? "ovmf" : "seabios"
-  boot    = var.virtio ? "order=virtio0;ide0" : "order=sata0;ide0"
+  boot    = "order=${var.interface}0;ide1"
   cpu {
     cores   = var.cpu
     numa    = false
@@ -16,7 +16,7 @@ resource "proxmox_vm_qemu" "this" {
   disk {
     backup = false
     iso    = local.proxmox_iso
-    slot   = "ide0"
+    slot   = "ide1"
     type   = "cdrom"
   }
   dynamic "disk" {
@@ -24,7 +24,7 @@ resource "proxmox_vm_qemu" "this" {
     content {
       backup = false
       iso    = local.proxmox_iso2
-      slot   = "ide1"
+      slot   = "ide2"
       type   = "cdrom"
     }
   }
@@ -36,7 +36,7 @@ resource "proxmox_vm_qemu" "this" {
       format     = "raw"
       serial     = "${upper(var.name)}-D${disk.value.id}"
       size       = "${disk.value.size}G"
-      slot       = "${var.virtio ? "virtio" : "sata"}${disk.value.id}"
+      slot       = "${var.interface}${disk.value.id}"
       storage    = disk.value.speed == "fast" ? "ssd" : "hdd"
       type       = "disk"
     }
@@ -60,16 +60,16 @@ resource "proxmox_vm_qemu" "this" {
       firewall = false
       id       = network.value.id
       macaddr  = network.value.mac_address
-      model    = var.virtio ? "virtio" : "e1000"
+      model    = var.interface == "virtio" || strcontains(var.iso2, "virtio") ? "virtio" : "e1000"
       tag      = 0
     }
   }
   onboot       = false
   protection   = false
   qemu_os      = var.os_type
-  scsihw       = var.virtio ? "virtio-scsi-single" : "lsi"
+  scsihw       = var.interface == "virtio" ? "virtio-scsi-single" : "lsi"
   startup      = ""
-  tablet       = true
+  tablet       = contains(["w2k","wxp"],var.os_type) ? false : true
   tags         = var.tags
   target_nodes = [var.node]
   dynamic "tpm_state" {

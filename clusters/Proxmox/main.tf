@@ -6,6 +6,7 @@ locals {
 module "netbox" {
   source = "../../modules/netbox"
   name   = local.name
+  token  = data.bitwarden-secrets_secret.secrets["netbox"].value
 }
 
 module "proxmox" {
@@ -15,8 +16,9 @@ module "proxmox" {
   cpu_type    = module.netbox.configuration.platform.cpu
   description = module.netbox.configuration.description
   id          = module.netbox.configuration.id
+  interface   = module.netbox.configuration.platform.interface
   iso         = module.netbox.configuration.platform.iso
-  iso2        = lookup(module.netbox.configuration.platform, "additional_iso", "none")
+  iso2        = module.netbox.configuration.platform.iso2
   memory      = module.netbox.configuration.memory
   name        = module.netbox.configuration.name
   networks    = module.netbox.configuration.nics
@@ -26,5 +28,4 @@ module "proxmox" {
   tags        = module.netbox.configuration.platform.tag
   type        = module.netbox.configuration.type
   uefi        = module.netbox.configuration.platform.uefi
-  virtio      = module.netbox.configuration.platform.virtio
 }
