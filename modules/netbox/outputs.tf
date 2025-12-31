@@ -13,8 +13,8 @@ output "configuration" {
       name      = local.platform.display
       tag       = local.platform.slug
       type      = local.platform.custom_fields.os_type
-      iso       = local.platform.custom_fields.iso
-      iso2      = local.platform.custom_fields.iso2
+      iso       = coalesce(local.platform.custom_fields.iso,"")
+      iso2      = coalesce(local.platform.custom_fields.iso2,"")
       lxc_image = local.platform.custom_fields.lxc_image
       uefi      = local.platform.custom_fields.uefi == "y"
       interface = local.platform.custom_fields.interface
