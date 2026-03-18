@@ -25,6 +25,7 @@ variable "id" {
 variable "iso" {
   description = "Filename of ISO to attach to VM"
   type        = string
+  default     = "none"
 }
 variable "iso2" {
   description = "Filename of additional ISO to attach to VM (optional)"
