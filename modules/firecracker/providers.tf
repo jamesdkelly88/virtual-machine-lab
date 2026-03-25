@@ -9,9 +9,9 @@ terraform {
 
 provider "system" {
   ssh {
-    host = "vm38"
-    port = "22"
-    user = "terraform"
+    host     = "vm38"
+    port     = "22"
+    user     = "terraform"
     password = "terraform"
   }
   sudo = true

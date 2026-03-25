@@ -6,6 +6,10 @@ variable "cpu" {
     error_message = "Value must be a whole number"
   }
 }
+variable "description" {
+  description = "Summary of the VM's intended usage"
+  type        = string
+}
 variable "id" {
   description = "ID number of the virtual machine. Must be between 0 and 254"
   type        = number

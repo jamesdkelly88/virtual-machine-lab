@@ -69,7 +69,7 @@ resource "proxmox_vm_qemu" "this" {
   qemu_os      = var.os_type
   scsihw       = var.interface == "virtio" ? "virtio-scsi-single" : "lsi"
   startup      = ""
-  tablet       = contains(["w2k","wxp"],var.os_type) ? false : true
+  tablet       = contains(["w2k", "wxp"], var.os_type) ? false : true
   tags         = var.tags
   target_nodes = [var.node]
   dynamic "tpm_state" {
