@@ -39,3 +39,18 @@ variable "networks" {
     domain      = bool
   }))
 }
+variable "os" {
+  description = "OS base image"
+  type        = string
+}
+
+variable "storage" {
+  description = "The disks to allocate to the virtual machine"
+  type = list(object({
+    # id          = number
+    size = number
+    # mount_point = string
+    # speed       = string
+    # emulate_ssd = bool
+  }))
+}
