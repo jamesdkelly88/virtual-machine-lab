@@ -1,6 +1,6 @@
 {
   "boot-source": {
-    "kernel_image_path": "../../kernel/${kernel}/vmlinux.bin",
+    "kernel_image_path": "/mnt/hdd/kernel/${kernel}/vmlinux.bin",
     "boot_args": "console=ttyS0 reboot=k panic=1 pci=off overlay_root=vdb init=/sbin/overlay-init",
     "initrd_path": null
   },
@@ -11,7 +11,7 @@
       "is_root_device": true,
       "cache_type": "Unsafe",
       "is_read_only": true,
-      "path_on_host": "../../rootfs/${os}.img",
+      "path_on_host": "/mnt/hdd/rootfs/${os}.img",
       "io_engine": "Sync",
       "rate_limiter": null,
       "socket": null

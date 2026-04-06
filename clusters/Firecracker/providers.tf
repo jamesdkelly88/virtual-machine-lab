@@ -37,17 +37,19 @@ provider "netbox" {
 
 provider "system" {
   ssh {
-    host     = "vm38" # TODO: netbox hypervisor
+    host     = module.netbox.configuration.hypervisor
     port     = "22"
-    user     = "terraform" # TODO: nitwarden secret
-    password = "terraform" # TODO: nitwarden secret
+    user     = data.bitwarden-secrets_secret.secrets["firecracker_user"].value
+    password = data.bitwarden-secrets_secret.secrets["firecracker_password"].value
   }
   sudo = true
 }
 
 data "bitwarden-secrets_secret" "secrets" {
   for_each = tomap({
-    netbox           = "18b5879e-acf6-4c4b-8e12-b31c007cac94"
+    netbox               = "18b5879e-acf6-4c4b-8e12-b31c007cac94"
+    firecracker_user     = "a0b97856-60ce-4d03-80cc-b42400a7de35"
+    firecracker_password = "74b1d9b4-7630-44a1-b619-b42400a7e9ac"
   })
   id = each.value
 }
