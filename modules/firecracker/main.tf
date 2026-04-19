@@ -21,18 +21,10 @@ data "system_command" "ifup" {
 }
 
 resource "system_file" "config" {
-  path  = "${system_folder.vm.path}/config.json"
-  user  = "firecracker"
-  group = "firecracker"
-  # TODO: jsonencode object
-  content = templatefile("${path.module}/config.tpl", {
-    cpu    = var.cpu
-    id     = var.id
-    kernel = local.kernel
-    mac    = var.networks[0].mac_address
-    memory = var.memory * 1024
-    os     = var.os
-  })
+  path    = "${system_folder.vm.path}/config.json"
+  user    = "firecracker"
+  group   = "firecracker"
+  content = replace(replace(jsonencode(local.config), "\"true\"", true), "\"false\"", false)
 }
 
 # TODO: system_command to create overlay.ext4 if it doesn't exist

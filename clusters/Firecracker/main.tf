@@ -18,6 +18,6 @@ module "firecracker" {
   memory      = module.netbox.configuration.memory
   name        = module.netbox.configuration.name
   networks    = module.netbox.configuration.nics
-  os          = lower(replace(module.netbox.configuration.platform.name," ","-"))
+  os          = lower(replace(module.netbox.configuration.platform.name, " ", "-"))
   storage     = module.netbox.configuration.disks
 }
