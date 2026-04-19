@@ -1,7 +1,7 @@
 locals {
 
-  args_linux     = "overlay_root=vdb init=/sbin/overlay-init pci=off"
-  args_talos     = "talos.platform=metal pti=on slab_nomerge pci=on"
+  args_linux     = "overlay_root=vdb init=/sbin/overlay-init"
+  args_talos     = "talos.platform=metal pti=on slab_nomerge"
   is_talos       = startswith(var.os, "talos-")
   kernel_version = "6.1.155"
   kernel = lookup({
