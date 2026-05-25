@@ -3,5 +3,5 @@ output "is_windows" {
 }
 
 output "network" {
-  value = local.nic
+  value = local.bridge
 }
